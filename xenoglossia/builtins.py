@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from .decorators import string_fn, array_fn, xenoglossia_fn
 from random import randrange, shuffle, randint
 import re
-from string import ascii_uppercase
+from string import ascii_lowercase, ascii_uppercase, digits
 
 from six import b, string_types
 from six.moves import range, reduce
@@ -251,6 +251,22 @@ def dotmatrix(input, *args):
     (NOTA BENE: this code has not been tested on an actual dot matrix printer.)
     """
     return "".join(map(lambda c: _DOTMATRIX_CHAR_DICT.get(c, c), input.upper()))
+
+_TINY_CHARS_KEYS = ascii_lowercase + ascii_uppercase + digits + "?!"
+_TINY_CHARS = u"\u1d43\u1d47\u1d9c\u1d48\u1d49\u1da0\u1d4d\u02b0\u1da6\u02b2\u1d4f\u1dab\u1d50" + \
+              u"\u1db0\u1d52\u1d56\u146b\u02b3\u02e2\u1d57\u1d58\u1d5b\u02b7\u02e3\u02b8\u1dbb" + \
+              u"\u1d2c\u1d2e\u1d9c\u1d30\u1d31\u1da0\u1d33\u1d34\u1d35\u1d36\u1d37\u1d38\u1d39" + \
+              u"\u1d3a\u1d3c\u1d3e\u146b\u1d3f\u02e2\u1d40\u1d41\u2c7d\u1d42\u02e3\u02b8\u1dbb" + \
+              u"\u2070\u00b9\u00b2\u00b3\u2074\u2075\u2076\u2077\u2078\u2079\ufe56\ufe57"
+_TINY_CHARS_DICT = dict(zip(_TINY_CHARS_KEYS, _TINY_CHARS))
+
+@xenoglossia_fn
+@string_fn
+def confide(input, *args):
+    """
+    Prepends *input* with "pssst... " and converts the string into tiny characters.
+    """
+    return "".join(map(lambda c: _TINY_CHARS_DICT.get(c, c), "pssst... " + input))
 
 @xenoglossia_fn
 @string_fn
