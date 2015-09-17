@@ -266,7 +266,7 @@ def confide(input, *args):
     """
     Prepends *input* with "pssst... " and converts the string into tiny characters.
     """
-    return "".join(map(lambda c: _TINY_CHARS_DICT.get(c, c), "pssst... " + input))
+    return "".join(map(lambda c: _TINY_CHARS_DICT.get(c, c), input))
 
 @xenoglossia_fn
 @string_fn
