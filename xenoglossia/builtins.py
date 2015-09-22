@@ -268,6 +268,12 @@ def confide(input, *args):
     """
     return "".join(map(lambda c: _TINY_CHARS_DICT.get(c, c), input))
 
+def parseltongue(input, *args):
+    """
+    Prepends *input* with "pssst... " and converts the string into tiny characters.
+    """
+    return confide("".join(map(lambda c: c*randrange(5, 8) if c.upper()=="S" else c, input))) + u"\U0001f40d"
+
 @xenoglossia_fn
 @string_fn
 def part_title(input, *args):
